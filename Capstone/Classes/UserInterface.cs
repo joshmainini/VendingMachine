@@ -11,7 +11,9 @@ namespace Capstone.Classes
     {
         public UserInterface(VendingMachine newMachine)
         {
-            int i = 0;
+			string dir = Environment.CurrentDirectory;
+			string fullpath = Path.Combine(dir, "vendingmachine.csv");
+			int i = 0;
             while (i == 0)
             {
                 try
@@ -44,7 +46,7 @@ namespace Capstone.Classes
                         }
                         while (x == 1)
                         {
-                            using (StreamReader sr = new StreamReader(@"C:\Users\snelson\team5-c-week4-pair-exercises\M1W4D4-c-capstone\etc\vendingmachine.csv"))
+                            using (StreamReader sr = new StreamReader(fullpath))
                             {
                                 while (!sr.EndOfStream)
                                 {
@@ -170,7 +172,7 @@ namespace Capstone.Classes
                             string filename = $"salesreport_{DateTime.Now.ToString("dd-MM-yyyy_hh-mm-ss")}.txt";
                             string directory = Environment.CurrentDirectory;
                             string fullPath = Path.Combine(directory, filename);
-                            using (StreamReader sr = new StreamReader(@"C:\Users\snelson\team5-c-week4-pair-exercises\M1W4D4-c-capstone\etc\vendingmachine.csv"))
+							using (StreamReader sr = new StreamReader(fullpath))
                             using (StreamWriter sw = new StreamWriter(fullPath, true))
                             {
                                 decimal totalSales = 0;

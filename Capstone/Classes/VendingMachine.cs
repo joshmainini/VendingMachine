@@ -13,37 +13,40 @@ namespace Capstone.Classes
         int saleCount = 0;
         public VendingMachine()
         {
-            using (StreamReader sr = new StreamReader(@"C:\Users\snelson\team5-c-week4-pair-exercises\M1W4D4-c-capstone\etc\vendingmachine.csv"))
-            {
-                while (!sr.EndOfStream)
-                {
-                    string line = sr.ReadLine();
-                    string[] lineArr = line.Split('|');
-                    string itemName = lineArr[1];
-                    decimal itemPrice = decimal.Parse(lineArr[2]);
+			string dir = Environment.CurrentDirectory;
+			string fullpath = Path.Combine(dir, "vendingmachine.csv");
 
-                    if (line[0] == 'A')
-                    {
-                        Chip newChip = new Chip(itemName, itemPrice);
-                        vendingDictionary.Add(lineArr[0], newChip);
-                    }
-                    if (line[0] == 'B')
-                    {
-                        Candy newCandy = new Candy(itemName, itemPrice);
-                        vendingDictionary.Add(lineArr[0], newCandy);
-                    }
-                    if (line[0] == 'C')
-                    {
-                        Drink newDrink = new Drink(itemName, itemPrice);
-                        vendingDictionary.Add(lineArr[0], newDrink);
-                    }
-                    if (line[0] == 'D')
-                    {
-                        Gum newGum = new Gum(itemName, itemPrice);
-                        vendingDictionary.Add(lineArr[0], newGum);
-                    }
-                }
-            }
+			using (StreamReader sr = new StreamReader(fullpath))
+			{
+				while (!sr.EndOfStream)
+				{
+					string line = sr.ReadLine();
+					string[] lineArr = line.Split('|');
+					string itemName = lineArr[1];
+					decimal itemPrice = decimal.Parse(lineArr[2]);
+
+					if (line[0] == 'A')
+					{
+						Chip newChip = new Chip(itemName, itemPrice);
+						vendingDictionary.Add(lineArr[0], newChip);
+					}
+					if (line[0] == 'B')
+					{
+						Candy newCandy = new Candy(itemName, itemPrice);
+						vendingDictionary.Add(lineArr[0], newCandy);
+					}
+					if (line[0] == 'C')
+					{
+						Drink newDrink = new Drink(itemName, itemPrice);
+						vendingDictionary.Add(lineArr[0], newDrink);
+					}
+					if (line[0] == 'D')
+					{
+						Gum newGum = new Gum(itemName, itemPrice);
+						vendingDictionary.Add(lineArr[0], newGum);
+					}
+				}
+			}
         }
         public decimal Balance
         {
